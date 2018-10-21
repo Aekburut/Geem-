@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+<form action="/products/insert" method="post">
+
+<div class="form-group">
+  <label for="">ID"</label>
+  <input type="number"
+    class="form-control" value="" name="id" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Product ID</small>
+</div>
+
+<div class="form-group">
+  <label for="">Title</label>
+  <input type="text"
+    class="form-control" value="" name="title" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Product Title</small>
+</div>
+
+<div class="form-group">
+  <label for="">Price</label>
+  <input type="number"
+    class="form-control" value="" name="price" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Product Price</small>
+</div>
+
+<div class="form-group">
+        <label for="">Time</label>
+        <input type="text"
+          class="form-control" value="<%= time %>"name="time" id="" aria-describedby="helpId" placeholder="">
+        <small id="helpId" class="form-text text-muted">time</small>
+</div>
+  <button type="submit" class="btn btn-secondary">Save</button>
+
+
+<form>
+<% include ../partials/footer %>

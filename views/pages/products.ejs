@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+<br>
+<input class="form-control btn-danger bg-dark" id="myInput" type="text" placeholder="Search..">
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th> <a class="btn btn-success" href="/insert" role="button">Insert</a></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+    <% products.forEach(function(product) { %>
+        <tr>
+            <td scope="row"><%= product.id %></td>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td>
+            <a class="btn btn-info" href="/products/<%= product.id%>" role="button">Edit</a>
+            </td>
+            <td>
+            <a class="btn btn-danger" href="" role="button">Delete</a>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+
+    <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+</table>
+
+
+
+<% include ../partials/footer %>
