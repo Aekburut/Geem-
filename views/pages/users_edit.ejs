@@ -1,6 +1,6 @@
 <% include ../partials/header %>
-
 <form action="/users/update" method="post">
+
 <div class="form-group">
   <label for="">ID"</label>
   <input type="number"
@@ -9,15 +9,15 @@
 </div>
 
 <div class="form-group">
-  <label for="">Email</label>
+  <label for="">Title</label>
   <input type="text"
     class="form-control" value="<%= user.email %>" name="email" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product Title</small>
 </div>
 
 <div class="form-group">
-  <label for="">password</label>
-  <input type="text"
+  <label for="">Price</label>
+  <input type="number"
     class="form-control" value="<%= user.password %>" name="password" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product Price</small>
 </div>
@@ -25,11 +25,12 @@
 <div class="form-group">
         <label for="">Time</label>
         <input type="text"
-          class="form-control" value="<%= time %>"name="" id="" aria-describedby="helpId" placeholder="" disabled>
+          class="form-control" value="<%= time %>"name="time" id="" aria-describedby="helpId" placeholder="" >
         <small id="helpId" class="form-text text-muted">time</small>
 </div>
-<button type="submit">submit</button>
 
-<!-- <a name="" id="" class="btn btn-primary" href="/users" role="button">Cancel</a> -->
-</form>
+<button type="submit" class="btn btn-success">Submit</button>
+
+<a name="" id="" class="btn btn-primary" href="/users" role="button">Cancel</a>
+<form>
 <% include ../partials/footer %>
