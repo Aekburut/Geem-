@@ -103,15 +103,15 @@ app.post('/products/update',function (req, res) {
     // Update data user
 app.post('/user/update',function (req, res) {
     var id =req.body.id;
-    var title =req.body.title;
-    var price =req.body.price;
-    var sql=`update user set title='${title}',price='${price}' where id='${id}'`;
+    var email =req.body.email;
+    var password =req.body.password;
+    var sql=`update user set email='${email}',password='${password}' where id='${id}'`;
     // res.send(sql)
     //db.none
     db.any(sql)
             .then(function (data) {
                 console.log('DATA:' + data);
-                res.redirect('/products')
+                res.redirect('/users')
             })
     
             .catch(function (error) {
