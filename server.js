@@ -182,9 +182,8 @@ app.get('/product_delete/:pid',function (req, res) {
     
  });
  app.get('/user_report',function (req, res) {
-    var sql = `select id, email, price
-    from users ,purchase_items
-    limit 5`;
+    var sql = `select email, price
+    from users`;
     db.any(sql)
         .then(function(data){
             console.log('DATA:'+data);
