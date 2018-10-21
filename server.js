@@ -87,7 +87,8 @@ app.post('/products/update',function (req, res) {
     var id =req.body.id;
     var title =req.body.title;
     var price =req.body.price;
-    var sql=`update products set title='${title}',price='${price}' where id='${id}'`;
+    var date = req.body.time;
+    var sql=`update products set title='${title}',price='${price}', created_at = '${date}' where id='${id}'`;
     // res.send(sql)
     //db.none
     db.any(sql)
@@ -105,6 +106,7 @@ app.post('/products/update',function (req, res) {
         var id =req.body.id;
         var email =req.body.email;
         var password =req.body.password;
+       
         var sql= `update users set id ='${id}', email='${email}',password='${password}' where id='${id}'`;
         // res.send(sql)
         //db.none
@@ -138,11 +140,6 @@ app.post('/products/insert', function (req, res){
             console.log('ERROR:' + error);
 
         })
-});
-
-app.get('/insert', function (req, res) {
-    var time = moment().format();
-    res.render('pages/insert', { time:time});
 });
 
 app.get('/product_delete/:pid',function (req, res) {
@@ -182,8 +179,9 @@ app.get('/product_delete/:pid',function (req, res) {
     
  });
  app.get('/user_report',function (req, res) {
-    var sql = `select email
-    from users`;
+    var sql = `select u.email, sum(p.price), pu.name
+    from users u,products p,purchases pu
+    order by sum(p.price)`;
     db.any(sql)
         .then(function(data){
             console.log('DATA:'+data);
