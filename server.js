@@ -117,7 +117,7 @@ app.post('/products/update',function (req, res) {
                 .catch(function (error) {
                     console.log('ERROR:' + error);
                 })
-        })
+        });
 
 app.post('/products/insert', function (req, res){
     var id = req.body.id;
