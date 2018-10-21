@@ -62,7 +62,7 @@ app.get('/users/:id', function (req, res) {
     var sql = "select * from users where id=" + id;
     db.any(sql)
         .then(function (data) {
-            res.render('pages/users_edit', { users: data[0],time: time })
+            res.render('pages/users_edit', { user: data[0],time: time })
 
         })
         .catch(function (error) {
