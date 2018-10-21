@@ -71,7 +71,7 @@ app.get('/users/:id', function (req, res) {
 
 });
 
-app.get('/user', function (req, res) {
+app.get('/users', function (req, res) {
     db.any('select * from users', )
         .then(function (data) {
             console.log('DATA' + data);
@@ -111,7 +111,7 @@ app.post('/products/update',function (req, res) {
         db.any(sql)
                 .then(function (data) {
                     console.log('DATA:' + data);
-                    res.redirect('/users');
+                    res.redirect('/users')
                 })
         
                 .catch(function (error) {
