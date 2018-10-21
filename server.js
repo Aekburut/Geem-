@@ -101,24 +101,23 @@ app.post('/products/update',function (req, res) {
             })
     })
     // Update data user
-app.post('/users/update',function (req, res) {
-    var id =req.body.id;
-    var email =req.body.email;
-    var password =req.body.password;
-    var sql=`update users set email='${email}',password='${password}' where id='${id}'`;
-    // res.send(sql)
-    //db.none
-    db.any(sql)
-            .then(function (data) {
-                console.log('DATA:' + data);
-                res.redirect('/users')
-            })
-    
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
-    })
-
+    app.post('/users/update',function (req, res) {
+        var id =req.body.id;
+        var email =req.body.email;
+        var password =req.body.password;
+        var sql=`update users set title='${email}',password='${password}' where id='${id}'`;
+        // res.send(sql)
+        //db.none
+        db.any(sql)
+                .then(function (data) {
+                    console.log('DATA:' + data);
+                    res.redirect('/users')
+                })
+        
+                .catch(function (error) {
+                    console.log('ERROR:' + error);
+                })
+        })
 
 app.post('/products/insert', function (req, res){
     var id = req.body.id;
