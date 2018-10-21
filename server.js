@@ -47,7 +47,7 @@ app.get('/products/:pid', function (req, res) {
     var sql = "select * from products where id=" + pid;
     db.any(sql)
         .then(function (data) {
-            res.render('pages/product_edit', { products: data[0],time: time })
+            res.render('pages/product_edit', { products: data[0], time: time })
 
         })
         .catch(function (error) {
@@ -62,7 +62,7 @@ app.get('/users/:id', function (req, res) {
     var sql = "select * from users where id=" + id;
     db.any(sql)
         .then(function (data) {
-            res.render('pages/users_edit', { user: data[0],time: time })
+            res.render('pages/users_edit', { user: data[0], time: time })
 
         })
         .catch(function (error) {
@@ -70,9 +70,12 @@ app.get('/users/:id', function (req, res) {
         })
 
 });
+app.get('/insert', function (req, res) {
+    res.render('pages/insert')
 
+});
 app.get('/users', function (req, res) {
-    db.any('select * from users', )
+    db.any('select * from users')
         .then(function (data) {
             console.log('DATA' + data);
             res.render('pages/users', { users: data })
@@ -83,113 +86,111 @@ app.get('/users', function (req, res) {
         })
 });
 // Update data
-app.post('/products/update',function (req, res) {
-    var id =req.body.id;
-    var title =req.body.title;
-    var price =req.body.price;
+app.post('/products/update', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
     var date = req.body.time;
-    var sql=`update products set title='${title}',price='${price}', created_at = '${date}' where id='${id}'`;
+    var sql = `update products set title='${title}',price='${price}', created_at = '${date}' where id='${id}'`;
     // res.send(sql)
     //db.none
     db.any(sql)
-            .then(function (data) {
-                console.log('DATA:' + data);
-                res.redirect('/products')
-            })
-    
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
-    })
-    // Update data user
-    app.post('/users/update',function (req, res) {
-        var id =req.body.id;
-        var email =req.body.email;
-        var password =req.body.password;
-       
-        var sql= `update users set id ='${id}', email='${email}',password='${password}' where id='${id}'`;
-        // res.send(sql)
-        //db.none
-        db.any(sql)
-                .then(function (data) {
-                    console.log('DATA:' + data);
-                    res.redirect('/users')
-                })
-        
-                .catch(function (error) {
-                    console.log('ERROR:' + error);
-                })
-        });
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
+        })
 
-app.post('/products/insert', function (req, res){
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+})
+// Update data user
+app.post('/users/update', function (req, res) {
     var id = req.body.id;
-    var title = req.body.title;
-    var time = req.body.time;
-    var price = req.body.price;
+    var email = req.body.email;
+    var password = req.body.password;
 
-    var sql = `INSERT INTO products (id,title,price,created_at) VALUES ('${id}','${title}','${price}','${time}')`;
-    console.log('UPDATE:' + sql);
+    var sql = `update users set id ='${id}', email='${email}',password='${password}' where id='${id}'`;
+    // res.send(sql)
+    //db.none
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            
-            res.redirect('/products')
+            res.redirect('/users')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+
+app.post('/product/insert', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `insert into products (id,title,price) 
+                       values('${id}','${title}','${price}')`;
+    db.any(sql)
+        .then(function (data) {
+
+            res.render('/product/insert')
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
+    res.redirect('/products');
+});
+
+app.get('/product_delete/:pid', function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM products';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products');
 
         })
         .catch(function (data) {
-            console.log('ERROR:' + error);
+            console.log('ERROR:' + console.error);
 
         })
 });
 
-app.get('/product_delete/:pid',function (req, res) {
-    var id = req.params.pid;
-    var sql = 'DELETE FROM products';
-    if (id){
-            sql += ' where id ='+ id;
-    }
-    db.any(sql)
-        .then(function(data){
-            console.log('DATA:'+data);
-            res.redirect('/products');
-    
-        })
-        .catch(function(data){
-                console.log('ERROR:'+console.error);
-                
-    })
- });
-
- app.get('/product_report/:pid',function (req, res) {
+app.get('/product_report/:pid', function (req, res) {
     var id = req.params.pid;
     var sql = `select product_id, title, products.price, purchase_id, quantity
     from products, purchase_items
     where products.id = product_id
     and product_id = ${id}`;
     db.any(sql)
-        .then(function(data){
-            console.log('DATA:'+data);
-            res.render('pages/Report' , { report:data})
-    
-        })
-        .catch(function(data){
-                console.log('ERROR:'+console.error);
-    })
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/Report', { report: data })
 
-    
- });
- app.get('/user_report',function (req, res) {
+        })
+        .catch(function (data) {
+            console.log('ERROR:' + console.error);
+        })
+
+
+});
+app.get('/user_report', function (req, res) {
     var sql = `select email
     from users `;
     db.any(sql)
-        .then(function(data){
-            console.log('DATA:'+data);
-            res.render('pages/user_report' , { ureport:data})
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/user_report', { ureport: data })
         })
-        .catch(function(data){
-                console.log('ERROR:'+console.error);
-    })
- });
+        .catch(function (data) {
+            console.log('ERROR:' + console.error);
+        })
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
