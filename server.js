@@ -181,6 +181,19 @@ app.get('/product_delete/:pid',function (req, res) {
 
     
  });
+ app.get('/user_report',function (req, res) {
+    var sql = `select id, email, price
+    from users ,purchase_items
+    limit 5`;
+    db.any(sql)
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.render('pages/user_report' , { ureport:data})
+        })
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+    })
+ });
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {

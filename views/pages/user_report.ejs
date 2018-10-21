@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+
+<div class="row">
+    <div class="col-2">
+        <a href="/users" class="h1 text-dark">&lt; Back</a>
+    </div>
+    <div class="col-10">
+        <h1></h1> 
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+    <% ureport.forEach(function(ureport) { %>
+        <tr>
+            <td scope="row"><%= ureport.id %></td>
+            <td><%= ureport.mail %></td>
+            <td><%= ureport.price %></td>
+            
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+
+
+<% include ../partials/footer %>

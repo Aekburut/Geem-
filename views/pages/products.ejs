@@ -9,8 +9,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Price</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Time</th>
             <th> <a class="btn btn-success" href="/insert" role="button">Add Products</a></th>
         </tr>
     </thead>
@@ -20,15 +19,14 @@
             <td scope="row"><%= product.id %></td>
             <td><%= product.title %></td>
             <td><%= product.price %></td>
+            <td><%= product.created_at %></td>
             <td>
             <a class="btn btn-info" href="/products/<%= product.id%>" role="button">Edit</a>
             </td>
-            <td>
-            <a class="btn btn-danger" href="" role="button">Delete</a>
-            </td>
+            
             <td>
                 <a class="btn btn-warning" href="/product_report/<%= product.id%>" role="button">Report</a>
-                </td>
+            </td>
         </tr>
         <% }); %>
     </tbody>
