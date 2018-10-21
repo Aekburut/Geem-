@@ -59,7 +59,7 @@ app.get('/products/:pid', function (req, res) {
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    var sql = "select * from users where id=" + id ;
+    var sql = "select * from users where id=" + id;
     db.any(sql)
         .then(function (data) {
             res.render('pages/users_edit', { user: data[0],time: time })
@@ -161,6 +161,10 @@ app.get('/product_delete/:pid',function (req, res) {
                 console.log('ERROR:'+console.error);
                 
     })
+ });
+
+ app.get('/product_report',function (req, res) {
+    res.render('pages/Report')
  });
 
 var port = process.env.PORT || 8080;
