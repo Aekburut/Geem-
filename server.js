@@ -163,8 +163,8 @@ app.get('/product_delete/:pid',function (req, res) {
     })
  });
 
- app.get('/product_report/:id',function (req, res) {
-    var id = req.params.id;
+ app.get('/product_report/:pid',function (req, res) {
+    var id = req.params.pid;
     var sql = `select product_id, title, products.price, purchase_id, quantity
     from products, purchase_items
     where products.id = product_id
