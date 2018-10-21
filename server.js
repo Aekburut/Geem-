@@ -101,7 +101,7 @@ app.post('/products/update',function (req, res) {
             })
     })
     // Update data user
-app.post('/user/update',function (req, res) {
+app.post('/users/update',function (req, res) {
     var id =req.body.id;
     var email =req.body.email;
     var password =req.body.password;
