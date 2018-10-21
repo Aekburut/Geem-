@@ -57,7 +57,7 @@ app.get('/products/:pid', function (req, res) {
 });
 
 app.get('/users/:id', function (req, res) {
-    var pid = req.params.id;
+    var id = req.params.id;
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     var sql = "select * from users where id=" + id;
     db.any(sql)
