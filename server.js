@@ -59,8 +59,8 @@ app.get('/products/:pid', function (req, res) {
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    var sql = "select * from users where id=" + id;
-    db.any(sql)
+    var sql = "select * from users where id=" + id + " ORDER BY id ASC";
+    db.any(sql + " ORDER BY id ASC")
         .then(function (data) {
             res.render('pages/users_edit', { user: data[0],time: time })
 
