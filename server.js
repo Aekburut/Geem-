@@ -182,7 +182,7 @@ app.get('/product_delete/:pid',function (req, res) {
     
  });
  app.get('/user_report',function (req, res) {
-    var sql = `select email, price
+    var sql = `select email
     from users`;
     db.any(sql)
         .then(function(data){
