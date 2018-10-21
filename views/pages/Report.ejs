@@ -1,34 +1,34 @@
 <% include ../partials/header %>
 
+
+<div class="row">
+    <div class="col-2">
+        <a href="/products" class="h1 text-dark">&lt; Back</a>
+    </div>
+    <div class="col-10">
+        <h1><%= report[0].title %> Report</h1> 
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
-            <th>Purchase Id</th>
+            <th>purchase id</th>
             <th>Quantity</th>
-            <th>total Price</th>
-
+            <th>total price</th>
         </tr>
     </thead>
     <tbody id="myTable">
-    <% products.forEach(function(product) { %>
+    <% report.forEach(function(report) { %>
         <tr>
-            <td scope="row"><%= product.id %></td>
-            <td><%= product.title %></td>
-            <td><%= product.price %></td>
+            <td scope="row"><%= report.purchase_id %></td>
+            <td><%= report.quantity %></td>
+            <td><%= report.price*report.quantity %></td>
+            
         </tr>
         <% }); %>
     </tbody>
-
-    <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
 </table>
 
 

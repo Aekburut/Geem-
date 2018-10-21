@@ -163,8 +163,23 @@ app.get('/product_delete/:pid',function (req, res) {
     })
  });
 
- app.get('/product_report',function (req, res) {
-    res.render('pages/Report')
+ app.get('/product_report/:pid',function (req, res) {
+    var id = req.params.pid;
+    var sql = `select product_id, title, products.price, purchase_id, quantity
+    from products, purchase_items
+    where products.id = product_id
+    and product_id = ${id}`;
+    db.any(sql)
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.render('pages/Report' , { report:data})
+    
+        })
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+    })
+
+    
  });
 
 var port = process.env.PORT || 8080;
