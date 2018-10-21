@@ -179,9 +179,8 @@ app.get('/product_delete/:pid',function (req, res) {
     
  });
  app.get('/user_report',function (req, res) {
-    var sql = `select u.email, sum(p.price), pu.name
-    from users u,products p,purchases pu
-    order by sum(p.price)`;
+    var sql = `select email
+    from users `;
     db.any(sql)
         .then(function(data){
             console.log('DATA:'+data);
