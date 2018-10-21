@@ -56,21 +56,19 @@ app.get('/products/:pid', function (req, res) {
 
 });
 
-app.get('/user/:id', function (req, res) {
-    var id = req.params.id;
-    var sql = 'select * from users';
-    if (id) {
-        sql += ' where id =' + id;
-    }
+app.get('/users/:pid', function (req, res) {
+    var pid = req.params.id;
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    var sql = "select * from users where id=" + id;
     db.any(sql)
         .then(function (data) {
-            console.log('DATA' + data);
-            res.render('pages/users', { users: data })
+            res.render('pages/users_edit', { users: data[0],time: time })
 
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
         })
+
 });
 
 app.get('/user', function (req, res) {
@@ -102,6 +100,25 @@ app.post('/products/update',function (req, res) {
                 console.log('ERROR:' + error);
             })
     })
+    // Update data user
+app.post('/user/update',function (req, res) {
+    var id =req.body.id;
+    var title =req.body.title;
+    var price =req.body.price;
+    var sql=`update user set title='${title}',price='${price}' where id='${id}'`;
+    // res.send(sql)
+    //db.none
+    db.any(sql)
+            .then(function (data) {
+                console.log('DATA:' + data);
+                res.redirect('/products')
+            })
+    
+            .catch(function (error) {
+                console.log('ERROR:' + error);
+            })
+    })
+
 
 app.post('/products/insert', function (req, res){
     var id = req.body.id;
