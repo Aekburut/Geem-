@@ -148,6 +148,32 @@ app.get('/insert', function (req, res) {
     res.render('pages/insert', { time:time});
 });
 
+app.post('/users/insert_users', function (req, res){
+    var id = req.body.id;
+    var email = req.body.Email;
+    var time = req.body.time;
+    var password = req.body.password;
+
+    var sql = `INSERT INTO users (id,email,password,created_at) VALUES ('${id}','${email}','${password}','${time}')`;
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            
+            res.redirect('/users')
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
+});
+
+app.get('/insert_users', function (req, res) {
+    var time = moment().format();
+    res.render('pages/insert_users', { time:time});
+});
+
 
 
 app.get('/product_delete/:pid', function (req, res) {
@@ -187,8 +213,12 @@ app.get('/product_report/:pid', function (req, res) {
 
 });
 app.get('/user_report', function (req, res) {
-    var sql = `select email, password, created_at
-    from users `;
+    var sql = `SELECT purchases.name,purchase_items.price,products.title
+    FROM purchase_items
+    INNER JOIN purchases
+    ON purchase_items.id=purchases.id
+    INNER JOIN products
+    ON purchase_items.product_id=products.id`;
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
