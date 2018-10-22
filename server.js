@@ -185,7 +185,7 @@ app.get('/product_report/:pid', function (req, res) {
 
 });
 app.get('/user_report', function (req, res) {
-    var sql = `select email, password, details
+    var sql = `select email, password, created_at
     from users `;
     db.any(sql)
         .then(function (data) {
