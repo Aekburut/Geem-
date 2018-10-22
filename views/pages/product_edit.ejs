@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 <form action="/products/update" method="post">
-
+  <h1 class="tex-center">Please enter a valid date time</h1>
 <div class="form-group">
-  <label for="">ID"</label>
+  <label for="">ID</label>
   <input type="number"
     class="form-control" value="<%= products.id %>" name="id" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product ID</small>
@@ -32,6 +32,7 @@
 <button type="submit" class="btn btn-success">Submit</button>
 
 <a name="" id="" class="btn btn-primary" href="/products" role="button">Cancel</a>
+
 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
   delete
 </button>
@@ -41,7 +42,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">delete</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

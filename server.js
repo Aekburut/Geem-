@@ -188,8 +188,26 @@ app.get('/product_delete/:pid', function (req, res) {
             res.redirect('/products');
 
         })
-        .catch(function (data) {
-            console.log('ERROR:' + console.error);
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
+});
+
+app.get('/users_delete/:pid', function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM users';
+    if (id) {
+        sql += ' where id =' + id;
+    }
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users');
+
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
 
         })
 });

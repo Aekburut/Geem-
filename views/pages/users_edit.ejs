@@ -3,7 +3,7 @@
 <h1 class="tex-center">Please enter a valid date time</h1>
 
 <div class="form-group">
-  <label for="">User ID"</label>
+  <label for="">User ID</label>
   <input type="number"
     class="form-control" value="<%= user.id %>" name="id" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product ID</small>
@@ -53,15 +53,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a name="" id="" class="btn btn-danger" href="/users_delete/<%= users.id %>" role="button">delete</a>
+        <a name="" id="" class="btn btn-danger" href="/users_delete/<%= user.id %>" role="button">delete</a>
       </div>
     </div>
   </div>
 </div>
 <form>
-<% include ../partials/footer %>
+  <% include ../partials/footer %>
 
 
-
-<form>
-<% include ../partials/footer %>
