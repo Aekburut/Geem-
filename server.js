@@ -69,9 +69,7 @@ app.get('/users/:id', function (req, res) {
             console.log('ERROR:' + error);
         })
 
-});
-app.get('/insert', function (req, res) {
-    res.render('pages/insert')
+
 
 });
 app.get('/users', function (req, res) {
@@ -124,23 +122,30 @@ app.post('/users/update', function (req, res) {
         })
 });
 
-app.post('/product/insert', function (req, res) {
+app.post('/products/insert', function (req, res){
     var id = req.body.id;
     var title = req.body.title;
+    var time = req.body.time;
     var price = req.body.price;
-    var sql = `insert into products (id,title,price) 
-                       values('${id}','${title}','${price}')`;
+
+    var sql = `INSERT INTO products (id,title,price,created_at) VALUES ('${id}','${title}','${price}','${time}')`;
+    console.log('UPDATE:' + sql);
     db.any(sql)
         .then(function (data) {
-
-            res.render('/product/insert')
+            console.log('DATA:' + data);
+            
+            res.redirect('/products')
 
         })
-        .catch(function (error) {
+        .catch(function (data) {
             console.log('ERROR:' + error);
 
         })
-    res.redirect('/products');
+});
+
+app.get('/insert', function (req, res) {
+    var time = moment().format();
+    res.render('pages/insert', { time:time});
 });
 
 app.get('/product_delete/:pid', function (req, res) {
@@ -180,7 +185,7 @@ app.get('/product_report/:pid', function (req, res) {
 
 });
 app.get('/user_report', function (req, res) {
-    var sql = `select email
+    var sql = `select email, password
     from users `;
     db.any(sql)
         .then(function (data) {
