@@ -1,8 +1,9 @@
 <% include ../partials/header %>
 <form action="/products/insert" method="post">
+  <h1 class="tex-center">Please enter a valid date time</h1>
 
 <div class="form-group">
-  <label for="">ID"</label>
+  <label for="">ID</label>
   <input type="number"
     class="form-control" value="" name="id" id="" aria-describedby="helpId" placeholder="">
   <small id="helpId" class="form-text text-muted">Product ID</small>
@@ -29,7 +30,8 @@
         <small id="helpId" class="form-text text-muted">time</small>
       
 </div>
-  <button type="submit" class="btn btn-secondary">Save</button>
+  <button type="submit" class="btn btn-success">Save</button>
+  <a name="" id="" class="btn btn-primary" href="/products" role="button">Cancel</a>
 
 
 <form>

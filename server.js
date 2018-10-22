@@ -148,6 +148,8 @@ app.get('/insert', function (req, res) {
     res.render('pages/insert', { time:time});
 });
 
+
+
 app.get('/product_delete/:pid', function (req, res) {
     var id = req.params.pid;
     var sql = 'DELETE FROM products';

@@ -1,5 +1,7 @@
 <% include ../partials/header %>
-
+<br>
+    <input class="form-control btn-warning bg-light mb-2 mr-sm-2" id="myInput" type="text" placeholder="Search..">
+<br>
 <table class="table">
     <thead>
         <tr>
@@ -26,6 +28,16 @@
         </tr>
         <% }); %>
     </tbody>
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+    </script>
 </table>
 
 
